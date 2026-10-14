@@ -1,6 +1,7 @@
 package dev.meiny.dan;
 
 import dev.meiny.dan.entity.ModEntityTypes;
+import dev.meiny.dan.item.ModCreativeTabs;
 import dev.meiny.dan.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.Identifier;
@@ -15,6 +16,7 @@ public class Dan implements ModInitializer {
 	public void onInitialize() {
 		ModEntityTypes.init();
 		ModItems.init();
+		ModCreativeTabs.init();
 		LOGGER.info("Dan Mod init!");
 	}
 
