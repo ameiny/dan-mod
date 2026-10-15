@@ -20,8 +20,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 public class ModEntityTypes {
-    private static final float CHERRY_MEADOW_CHANCE = 0.2f;
+    private static final float CHERRY_CHANCE = 0.6f;
+    private static final float MEADOW_CHANCE = 0.2f;
     private static final float FLOWER_FOREST_CHANCE = 0.6f;
+    private static final float FOREST_CHANCE = 0.3f;
     private static final float JUNGLE_CHANCE = 0.25f;
     private static final float MANGROVE_CHANCE = 0.1f;
 
@@ -42,11 +44,17 @@ public class ModEntityTypes {
 
     public static void init() {
         BiomeModifications.addSpawn(
-                BiomeSelectors.includeByKey(Biomes.CHERRY_GROVE, Biomes.FLOWER_FOREST, Biomes.MEADOW),
+                BiomeSelectors.includeByKey(Biomes.CHERRY_GROVE),
+                MobCategory.CREATURE, DAN, 2, 1, 2);
+
+        BiomeModifications.addSpawn(
+                BiomeSelectors.includeByKey(Biomes.FLOWER_FOREST, Biomes.MEADOW),
                 MobCategory.CREATURE, DAN, 1, 1, 2);
 
         BiomeModifications.addSpawn(
-                BiomeSelectors.includeByKey(Biomes.JUNGLE, Biomes.MANGROVE_SWAMP, Biomes.BAMBOO_JUNGLE),
+                BiomeSelectors.includeByKey(
+                        Biomes.JUNGLE, Biomes.MANGROVE_SWAMP, Biomes.BAMBOO_JUNGLE,
+                        Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.OLD_GROWTH_BIRCH_FOREST),
                 MobCategory.CREATURE, DAN, 1, 1, 1);
     }
 
@@ -59,11 +67,17 @@ public class ModEntityTypes {
     }
 
     private static float spawnChance(Holder<Biome> biome) {
-        if (biome.is(Biomes.CHERRY_GROVE) || biome.is(Biomes.MEADOW)) {
-            return CHERRY_MEADOW_CHANCE;
+        if (biome.is(Biomes.CHERRY_GROVE)) {
+            return CHERRY_CHANCE;
+        }
+        if (biome.is(Biomes.MEADOW)) {
+            return MEADOW_CHANCE;
         }
         if (biome.is(Biomes.FLOWER_FOREST)) {
             return FLOWER_FOREST_CHANCE;
+        }
+        if (biome.is(Biomes.FOREST) || biome.is(Biomes.BIRCH_FOREST) || biome.is(Biomes.OLD_GROWTH_BIRCH_FOREST)) {
+            return FOREST_CHANCE;
         }
         if (biome.is(Biomes.MANGROVE_SWAMP)) {
             return MANGROVE_CHANCE;

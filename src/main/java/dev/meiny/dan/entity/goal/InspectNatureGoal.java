@@ -16,6 +16,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class InspectNatureGoal extends Goal {
     private static final int SEARCH_CHANCE = 20;
@@ -93,7 +95,7 @@ public class InspectNatureGoal extends Goal {
                     && this.mob.distanceToSqr(this.targetAnimal) < maxDistance * maxDistance;
         }
         return this.targetFlower != null
-                && this.mob.level().getBlockState(this.targetFlower).is(BlockTags.SMALL_FLOWERS);
+                && isFlower(this.mob.level().getBlockState(this.targetFlower));
     }
 
     @Override
@@ -152,6 +154,15 @@ public class InspectNatureGoal extends Goal {
         forgetOld();
     }
 
+    private static boolean isFlower(BlockState state) {
+        return state.is(BlockTags.FLOWERS)
+                && !state.is(Blocks.CHERRY_LEAVES)
+                && !state.is(Blocks.FLOWERING_AZALEA_LEAVES)
+                && !state.is(Blocks.SPORE_BLOSSOM)
+                && !state.is(Blocks.MANGROVE_PROPAGULE)
+                && !state.is(Blocks.CHORUS_FLOWER);
+    }
+
     private void remember() {
         long now = this.mob.level().getGameTime();
         if (this.targetAnimal != null) {
@@ -206,7 +217,7 @@ public class InspectNatureGoal extends Goal {
         BlockPos origin = this.mob.blockPosition();
         List<BlockPos> flowers = new ArrayList<>();
         for (BlockPos pos : BlockPos.betweenClosed(origin.offset(-this.range, -2, -this.range), origin.offset(this.range, 2, this.range))) {
-            if (this.mob.level().getBlockState(pos).is(BlockTags.SMALL_FLOWERS)
+            if (isFlower(this.mob.level().getBlockState(pos))
                     && !isRemembered(this.seenFlowers, pos)) {
                 flowers.add(pos.immutable());
             }
