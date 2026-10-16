@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "dan:block/dan_block",
+    "side": "dan:block/dan_block",
+    "top": "dan:block/dan_block"
+  }
+}

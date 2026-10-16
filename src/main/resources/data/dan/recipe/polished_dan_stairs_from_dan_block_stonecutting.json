@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "dan:polished_dan_block",
+  "result": {
+    "id": "dan:polished_dan_stairs"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "dan:block/polished_dan_slab" },
+    "type=double": { "model": "dan:block/polished_dan_block" },
+    "type=top": { "model": "dan:block/polished_dan_slab_top" }
+  }
+}

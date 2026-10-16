@@ -1,5 +1,12 @@
 {
   "entity.dan.dan": "Dan",
   "itemGroup.dan.dan_tab": "Dan Mod",
-  "item.dan.dan_spawn_egg": "Dan-Spawn-Ei"
+  "item.dan.dan_spawn_egg": "Dan-Spawn-Ei",
+  "subtitles.dan.greet": "Dan grüßt",
+  "block.dan.dan_block": "Dan-Block",
+  "block.dan.dan_slab": "Dan-Stufe",
+  "block.dan.dan_stairs": "Dan-Treppe",
+  "block.dan.polished_dan_block": "Polierter Dan-Block",
+  "block.dan.polished_dan_slab": "Polierte Dan-Stufe",
+  "block.dan.polished_dan_stairs": "Polierte Dan-Treppe"
 }

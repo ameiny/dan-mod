@@ -82,6 +82,10 @@ public class InspectNatureGoal extends Goal {
         } else {
             spawnParticles(ParticleTypes.HAPPY_VILLAGER, this.targetFlower.getX() + 0.5, this.targetFlower.getY() + 0.8, this.targetFlower.getZ() + 0.5);
         }
+
+        if (this.mob instanceof DanEntity dan) {
+            dan.setInspecting(true);
+        }
     }
 
     @Override
@@ -152,6 +156,10 @@ public class InspectNatureGoal extends Goal {
         this.targetFlower = null;
         this.cooldown = COOLDOWN_MIN + this.mob.getRandom().nextInt(COOLDOWN_RANDOM);
         forgetOld();
+
+        if (this.mob instanceof DanEntity dan) {
+            dan.setInspecting(false);
+        }
     }
 
     private static boolean isFlower(BlockState state) {

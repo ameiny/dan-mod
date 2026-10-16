@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "dan:polished_dan_block",
+  "result": {
+    "count": 2,
+    "id": "dan:polished_dan_slab"
+  }
+}

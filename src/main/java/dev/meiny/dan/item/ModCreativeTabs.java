@@ -1,6 +1,7 @@
 package dev.meiny.dan.item;
 
 import dev.meiny.dan.Dan;
+import dev.meiny.dan.block.ModBlocks;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,6 +22,12 @@ public class ModCreativeTabs {
                 .icon(() -> new ItemStack(ModItems.DAN_SPAWN_EGG))
                 .displayItems((context, output) -> {
                     output.accept(ModItems.DAN_SPAWN_EGG);
+                    output.accept(ModBlocks.DAN_BLOCK);
+                    output.accept(ModBlocks.DAN_STAIRS);
+                    output.accept(ModBlocks.DAN_SLAB);
+                    output.accept(ModBlocks.POLISHED_DAN_BLOCK);
+                    output.accept(ModBlocks.POLISHED_DAN_STAIRS);
+                    output.accept(ModBlocks.POLISHED_DAN_SLAB);
                 })
                 .build());
     }

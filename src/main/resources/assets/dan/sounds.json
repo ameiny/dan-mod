@@ -1,0 +1,8 @@
+{
+  "entity.dan.greet": {
+    "sounds": [
+      "dan:greet"
+    ],
+    "subtitle": "subtitles.dan.greet"
+  }
+}
