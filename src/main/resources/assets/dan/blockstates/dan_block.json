@@ -1,5 +1,19 @@
 {
   "variants": {
-    "": { "model": "dan:block/dan_block" }
+    "facing=east": {
+      "model": "dan:block/dan_block",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "dan:block/dan_block",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "dan:block/dan_block"
+    },
+    "facing=west": {
+      "model": "dan:block/dan_block",
+      "y": 90
+    }
   }
 }

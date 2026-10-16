@@ -12,14 +12,14 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.GlazedTerracottaBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class ModBlocks {
     public static final Block DAN_BLOCK = register(
             "dan_block",
-            Block::new,
+            GlazedTerracottaBlock::new,
             BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS)
     );
 
@@ -31,13 +31,13 @@ public class ModBlocks {
 
     public static final Block DAN_SLAB = register(
             "dan_slab",
-            SlabBlock::new,
+            FacingSlabBlock::new,
             BlockBehaviour.Properties.ofFullCopy(DAN_BLOCK)
     );
 
     public static final Block POLISHED_DAN_BLOCK = register(
             "polished_dan_block",
-            Block::new,
+            GlazedTerracottaBlock::new,
             BlockBehaviour.Properties.ofFullCopy(DAN_BLOCK)
     );
 
@@ -49,7 +49,7 @@ public class ModBlocks {
 
     public static final Block POLISHED_DAN_SLAB = register(
             "polished_dan_slab",
-            SlabBlock::new,
+            FacingSlabBlock::new,
             BlockBehaviour.Properties.ofFullCopy(POLISHED_DAN_BLOCK)
     );
 

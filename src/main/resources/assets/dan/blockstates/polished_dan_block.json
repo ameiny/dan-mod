@@ -1,5 +1,19 @@
 {
   "variants": {
-    "": { "model": "dan:block/polished_dan_block" }
+    "facing=east": {
+      "model": "dan:block/polished_dan_block",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "dan:block/polished_dan_block",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "dan:block/polished_dan_block"
+    },
+    "facing=west": {
+      "model": "dan:block/polished_dan_block",
+      "y": 90
+    }
   }
 }
