@@ -53,5 +53,12 @@
   "advancements.dan.doener_at_night.title": "3 A.M. Döner",
   "advancements.dan.doener_at_night.description": "Eat a vegan döner between midnight and 5 a.m.",
   "advancements.dan.doener_hangover.title": "Hangover Cure",
-  "advancements.dan.doener_hangover.description": "Eat a vegan döner while feeling nauseous"
+  "advancements.dan.doener_hangover.description": "Eat a vegan döner while feeling nauseous",
+  "item.dan.milk_jumbo": "Milk Jumbo",
+  "message.dan.dan_stays": "Dan is waiting here",
+  "message.dan.dan_follows": "Dan is coming with you",
+  "advancements.dan.eat_milk_jumbo.title": "Jumbo Break",
+  "advancements.dan.eat_milk_jumbo.description": "Eat a Milk Jumbo",
+  "advancements.dan.befriend_dan.title": "Best Buddy",
+  "advancements.dan.befriend_dan.description": "Befriend a Dan with Milk Jumbos"
 }

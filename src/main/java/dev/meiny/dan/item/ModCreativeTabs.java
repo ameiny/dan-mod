@@ -23,6 +23,7 @@ public class ModCreativeTabs {
                 .displayItems((context, output) -> {
                     output.accept(ModItems.DAN_SPAWN_EGG);
                     output.accept(ModItems.VEGAN_DOENER);
+                    output.accept(ModItems.MILK_JUMBO);
                     output.accept(ModBlocks.DAN_BLOCK);
                     output.accept(ModBlocks.DAN_STAIRS);
                     output.accept(ModBlocks.DAN_SLAB);

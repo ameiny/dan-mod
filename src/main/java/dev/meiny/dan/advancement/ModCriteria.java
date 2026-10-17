@@ -18,6 +18,9 @@ public class ModCriteria {
     public static final PlayerTrigger LURED_DAN_HOME = Registry.register(
             BuiltInRegistries.TRIGGER_TYPES, Dan.id("lured_dan_home"), new PlayerTrigger());
 
+    public static final PlayerTrigger BEFRIENDED_DAN = Registry.register(
+            BuiltInRegistries.TRIGGER_TYPES, Dan.id("befriended_dan"), new PlayerTrigger());
+
     public static void init() {
     }
 }

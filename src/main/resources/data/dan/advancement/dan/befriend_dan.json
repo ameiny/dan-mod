@@ -1,0 +1,28 @@
+{
+  "parent": "dan:dan/eat_milk_jumbo",
+  "criteria": {
+    "befriended": {
+      "trigger": "dan:befriended_dan"
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:lead"
+    },
+    "title": {
+      "translate": "advancements.dan.befriend_dan.title"
+    },
+    "description": {
+      "translate": "advancements.dan.befriend_dan.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "befriended"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

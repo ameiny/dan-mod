@@ -9,14 +9,21 @@ import com.geckolib.animation.object.PlayState;
 import com.geckolib.constant.DefaultAnimations;
 import com.geckolib.util.GeckoLibUtil;
 import dev.meiny.dan.advancement.ModCriteria;
+import dev.meiny.dan.entity.goal.DanFollowOwnerGoal;
+import dev.meiny.dan.entity.goal.DanStayGoal;
 import dev.meiny.dan.entity.goal.DanTemptGoal;
 import dev.meiny.dan.entity.goal.GreetGoal;
 import dev.meiny.dan.entity.goal.InspectNatureGoal;
 import dev.meiny.dan.entity.goal.TradeWithPlayerGoal;
+import dev.meiny.dan.item.ModItems;
 import dev.meiny.dan.sound.ModSounds;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import net.minecraft.core.UUIDUtil;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -44,6 +51,8 @@ import net.minecraft.world.item.trading.Merchant;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
@@ -54,6 +63,8 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     private static final long LURE_TIMEOUT_TICKS = 200L;
     private static final double LURE_DISTANCE = 100.0;
     private static final double MEETING_WITNESS_RANGE = 16.0;
+    private static final int BEFRIEND_CHANCE = 3;
+    private static final float FRIEND_HEAL_AMOUNT = 4.0f;
 
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private final Map<UUID, Long> greetedRecently = new HashMap<>();
@@ -70,6 +81,9 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     private Vec3 lureOrigin;
     private long lastLureTime;
 
+    private UUID ownerId;
+    private boolean staying;
+
     public DanEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
     }
@@ -85,14 +99,16 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Monster.class, 8.0f, 1.0, 1.5));
+        this.goalSelector.addGoal(1, new DanStayGoal(this));
         this.goalSelector.addGoal(2, new PanicGoal(this, 1.6));
         this.goalSelector.addGoal(3, new TradeWithPlayerGoal(this));
-        this.goalSelector.addGoal(4, new DanTemptGoal(this, 1.1, Ingredient.of(Items.IRON_CHAIN)));
-        this.goalSelector.addGoal(5, new GreetGoal(this, 1.0, 8));
-        this.goalSelector.addGoal(6, new InspectNatureGoal(this, 1.0, 10));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 0.8));
-        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0f, 1.0f));
-        this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(4, new DanFollowOwnerGoal(this, 1.2));
+        this.goalSelector.addGoal(5, new DanTemptGoal(this, 1.1, Ingredient.of(Items.IRON_CHAIN)));
+        this.goalSelector.addGoal(6, new GreetGoal(this, 1.0, 8));
+        this.goalSelector.addGoal(7, new InspectNatureGoal(this, 1.0, 10));
+        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.8));
+        this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0f, 1.0f));
+        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
     }
 
     @Override
@@ -105,6 +121,34 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
         if (!this.isAlive() || this.isTrading()) {
             return super.mobInteract(player, hand);
         }
+
+        ItemStack stack = player.getItemInHand(hand);
+        if (stack.is(ModItems.MILK_JUMBO)) {
+            if (!this.hasOwner()) {
+                if (this.level() instanceof ServerLevel serverLevel) {
+                    stack.consume(1, player);
+                    this.tryBefriend(serverLevel, player);
+                }
+                return InteractionResult.SUCCESS;
+            }
+            if (this.isOwnedBy(player) && this.getHealth() < this.getMaxHealth()) {
+                if (!this.level().isClientSide()) {
+                    stack.consume(1, player);
+                    this.heal(FRIEND_HEAL_AMOUNT);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        }
+
+        if (this.isOwnedBy(player) && player.isSecondaryUseActive()) {
+            if (!this.level().isClientSide()) {
+                this.setStaying(!this.staying);
+                player.sendOverlayMessage(Component.translatable(
+                        this.staying ? "message.dan.dan_stays" : "message.dan.dan_follows"));
+            }
+            return InteractionResult.SUCCESS;
+        }
+
         if (!this.level().isClientSide()) {
             this.setTradingPlayer(player);
             this.openTradingScreen(player, this.getDisplayName(), 1);
@@ -198,6 +242,64 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     public void greet() {
         triggerAnim("action", "greet");
         this.playSound(ModSounds.DAN_GREET1, 1.0f, this.getVoicePitch());
+    }
+
+    public boolean hasOwner() {
+        return this.ownerId != null;
+    }
+
+    public boolean isOwnedBy(Player player) {
+        return this.ownerId != null && this.ownerId.equals(player.getUUID());
+    }
+
+    public Player getOwner() {
+        return this.ownerId == null ? null : this.level().getPlayerByUUID(this.ownerId);
+    }
+
+    public boolean isStaying() {
+        return this.staying;
+    }
+
+    public void setStaying(boolean staying) {
+        this.staying = staying;
+        if (staying) {
+            this.getNavigation().stop();
+        }
+    }
+
+    private void tryBefriend(ServerLevel level, Player player) {
+        if (this.getRandom().nextInt(BEFRIEND_CHANCE) != 0) {
+            this.spawnFriendshipParticles(level, ParticleTypes.SMOKE);
+            return;
+        }
+        this.ownerId = player.getUUID();
+        this.staying = false;
+        this.getNavigation().stop();
+        this.greet();
+        this.spawnFriendshipParticles(level, ParticleTypes.HEART);
+        if (player instanceof ServerPlayer serverPlayer) {
+            ModCriteria.BEFRIENDED_DAN.trigger(serverPlayer);
+        }
+    }
+
+    private void spawnFriendshipParticles(ServerLevel level, SimpleParticleType type) {
+        level.sendParticles(type, this.getX(), this.getY(0.9), this.getZ(), 7, 0.4, 0.3, 0.4, 0.02);
+    }
+
+    @Override
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        if (this.ownerId != null) {
+            output.store("Owner", UUIDUtil.CODEC, this.ownerId);
+        }
+        output.putBoolean("Staying", this.staying);
+    }
+
+    @Override
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.ownerId = input.read("Owner", UUIDUtil.CODEC).orElse(null);
+        this.staying = input.getBooleanOr("Staying", false);
     }
 
     public void trackLure(Player player) {

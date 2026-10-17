@@ -1,0 +1,29 @@
+{
+  "parent": "dan:dan/aldi",
+  "criteria": {
+    "ate_milk_jumbo": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "dan:milk_jumbo"
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "dan:milk_jumbo"
+    },
+    "title": {
+      "translate": "advancements.dan.eat_milk_jumbo.title"
+    },
+    "description": {
+      "translate": "advancements.dan.eat_milk_jumbo.description"
+    }
+  },
+  "requirements": [
+    [
+      "ate_milk_jumbo"
+    ]
+  ]
+}

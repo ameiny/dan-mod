@@ -22,6 +22,7 @@ import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 
 public class ModItems {
     private static final int VEGAN_DOENER_EFFECT_TICKS = 200;
+    private static final int MILK_JUMBO_EFFECT_TICKS = 160;
 
     public static final FoodProperties VEGAN_DOENER_FOOD = new FoodProperties.Builder()
             .nutrition(8)
@@ -33,6 +34,18 @@ public class ModItems {
                     new MobEffectInstance(MobEffects.SPEED, VEGAN_DOENER_EFFECT_TICKS, 0),
                     new MobEffectInstance(MobEffects.REGENERATION, VEGAN_DOENER_EFFECT_TICKS, 0)
             )))
+            .build();
+
+    public static final FoodProperties MILK_JUMBO_FOOD = new FoodProperties.Builder()
+            .nutrition(4)
+            .saturationModifier(0.3f)
+            .alwaysEdible()
+            .build();
+
+    public static final Consumable MILK_JUMBO_CONSUMABLE = Consumables.defaultFood()
+            .consumeSeconds(0.8f)
+            .onConsume(new ApplyStatusEffectsConsumeEffect(
+                    new MobEffectInstance(MobEffects.SPEED, MILK_JUMBO_EFFECT_TICKS, 1)))
             .build();
 
     public static final Item DAN_SPAWN_EGG = register(
@@ -47,6 +60,12 @@ public class ModItems {
             new Item.Properties().food(VEGAN_DOENER_FOOD, VEGAN_DOENER_CONSUMABLE)
     );
 
+    public static final Item MILK_JUMBO = register(
+            "milk_jumbo",
+            Item::new,
+            new Item.Properties().food(MILK_JUMBO_FOOD, MILK_JUMBO_CONSUMABLE)
+    );
+
     private static Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
         ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Dan.MOD_ID, name));
         Item item = factory.apply(properties.setId(key));
@@ -59,6 +78,7 @@ public class ModItems {
         });
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(output -> {
             output.accept(VEGAN_DOENER);
+            output.accept(MILK_JUMBO);
         });
     }
 }

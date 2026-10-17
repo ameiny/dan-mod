@@ -1,5 +1,5 @@
 {
-  "parent": "dan:dan/root",
+  "parent": "dan:dan/doener_from_dan",
   "criteria": {
     "ate_doener": {
       "trigger": "minecraft:consume_item",
