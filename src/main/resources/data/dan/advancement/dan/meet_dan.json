@@ -1,0 +1,33 @@
+{
+  "parent": "dan:dan/root",
+  "criteria": {
+    "talked_to_dan": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "dan:dan"
+          }
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "dan:dan_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.dan.meet_dan.title"
+    },
+    "description": {
+      "translate": "advancements.dan.meet_dan.description"
+    }
+  },
+  "requirements": [
+    [
+      "talked_to_dan"
+    ]
+  ]
+}

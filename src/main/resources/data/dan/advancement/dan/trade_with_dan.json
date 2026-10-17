@@ -1,0 +1,24 @@
+{
+  "parent": "dan:dan/meet_dan",
+  "criteria": {
+    "traded": {
+      "trigger": "dan:traded_with_dan"
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:pink_petals"
+    },
+    "title": {
+      "translate": "advancements.dan.trade_with_dan.title"
+    },
+    "description": {
+      "translate": "advancements.dan.trade_with_dan.description"
+    }
+  },
+  "requirements": [
+    [
+      "traded"
+    ]
+  ]
+}

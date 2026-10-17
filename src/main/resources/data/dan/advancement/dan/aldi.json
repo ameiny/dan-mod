@@ -1,0 +1,36 @@
+{
+  "parent": "dan:dan/root",
+  "criteria": {
+    "in_aldi": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "dan:aldi"
+            }
+          }
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:bundle"
+    },
+    "title": {
+      "translate": "advancements.dan.aldi.title"
+    },
+    "description": {
+      "translate": "advancements.dan.aldi.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "in_aldi"
+    ]
+  ]
+}

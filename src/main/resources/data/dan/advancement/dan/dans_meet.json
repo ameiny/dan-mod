@@ -1,0 +1,24 @@
+{
+  "parent": "dan:dan/meet_dan",
+  "criteria": {
+    "saw_meeting": {
+      "trigger": "dan:saw_dans_meet"
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:cherry_sapling"
+    },
+    "title": {
+      "translate": "advancements.dan.dans_meet.title"
+    },
+    "description": {
+      "translate": "advancements.dan.dans_meet.description"
+    }
+  },
+  "requirements": [
+    [
+      "saw_meeting"
+    ]
+  ]
+}

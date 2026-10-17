@@ -1,0 +1,38 @@
+{
+  "parent": "dan:dan/eat_vegan_doener",
+  "criteria": {
+    "ate_at_night": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "dan:vegan_doener"
+        },
+        "player": {
+          "type": "minecraft:time_check",
+          "clock": "minecraft:overworld",
+          "period": 24000,
+          "value": {
+            "min": 18000,
+            "max": 23000
+          }
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:clock"
+    },
+    "title": {
+      "translate": "advancements.dan.doener_at_night.title"
+    },
+    "description": {
+      "translate": "advancements.dan.doener_at_night.description"
+    }
+  },
+  "requirements": [
+    [
+      "ate_at_night"
+    ]
+  ]
+}

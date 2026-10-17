@@ -1,5 +1,6 @@
 package dev.meiny.dan;
 
+import dev.meiny.dan.advancement.ModCriteria;
 import dev.meiny.dan.block.ModBlocks;
 import dev.meiny.dan.entity.ModEntityTypes;
 import dev.meiny.dan.item.ModCreativeTabs;
@@ -21,6 +22,7 @@ public class Dan implements ModInitializer {
 		ModItems.init();
 		ModCreativeTabs.init();
 		ModSounds.init();
+		ModCriteria.init();
 		LOGGER.info("Dan Mod init!");
 	}
 

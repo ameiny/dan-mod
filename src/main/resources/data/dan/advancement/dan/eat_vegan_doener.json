@@ -1,0 +1,29 @@
+{
+  "parent": "dan:dan/root",
+  "criteria": {
+    "ate_doener": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "dan:vegan_doener"
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "dan:vegan_doener"
+    },
+    "title": {
+      "translate": "advancements.dan.eat_vegan_doener.title"
+    },
+    "description": {
+      "translate": "advancements.dan.eat_vegan_doener.description"
+    }
+  },
+  "requirements": [
+    [
+      "ate_doener"
+    ]
+  ]
+}

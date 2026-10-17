@@ -1,0 +1,24 @@
+{
+  "parent": "dan:dan/trade_with_dan",
+  "criteria": {
+    "bought_out": {
+      "trigger": "dan:bought_out_dan"
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:barrier"
+    },
+    "title": {
+      "translate": "advancements.dan.sold_out.title"
+    },
+    "description": {
+      "translate": "advancements.dan.sold_out.description"
+    }
+  },
+  "requirements": [
+    [
+      "bought_out"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "parent": "dan:dan/dan_block",
+  "criteria": {
+    "has_polished_dan_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "dan:polished_dan_block"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "dan:polished_dan_block"
+    },
+    "title": {
+      "translate": "advancements.dan.polished_dan_block.title"
+    },
+    "description": {
+      "translate": "advancements.dan.polished_dan_block.description"
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_dan_block"
+    ]
+  ]
+}

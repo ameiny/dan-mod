@@ -1,0 +1,100 @@
+{
+  "parent": "dan:dan/polished_dan_block",
+  "criteria": {
+    "dan_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "dan:dan_block"
+          }
+        ]
+      }
+    },
+    "dan_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "dan:dan_slab"
+          }
+        ]
+      }
+    },
+    "dan_stairs": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "dan:dan_stairs"
+          }
+        ]
+      }
+    },
+    "polished_dan_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "dan:polished_dan_block"
+          }
+        ]
+      }
+    },
+    "polished_dan_slab": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "dan:polished_dan_slab"
+          }
+        ]
+      }
+    },
+    "polished_dan_stairs": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "dan:polished_dan_stairs"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "dan:polished_dan_stairs"
+    },
+    "title": {
+      "translate": "advancements.dan.all_dan_blocks.title"
+    },
+    "description": {
+      "translate": "advancements.dan.all_dan_blocks.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "dan_block"
+    ],
+    [
+      "dan_slab"
+    ],
+    [
+      "dan_stairs"
+    ],
+    [
+      "polished_dan_block"
+    ],
+    [
+      "polished_dan_slab"
+    ],
+    [
+      "polished_dan_stairs"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

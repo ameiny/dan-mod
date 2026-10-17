@@ -1,0 +1,31 @@
+{
+  "parent": "dan:dan/iron_ingot",
+  "criteria": {
+    "has_iron_chain": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_chain"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_chain"
+    },
+    "title": {
+      "translate": "advancements.dan.iron_chain.title"
+    },
+    "description": {
+      "translate": "advancements.dan.iron_chain.description"
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_chain"
+    ]
+  ]
+}

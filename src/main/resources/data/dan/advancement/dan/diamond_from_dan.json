@@ -1,0 +1,33 @@
+{
+  "parent": "dan:dan/trade_with_dan",
+  "criteria": {
+    "bought_diamond": {
+      "trigger": "dan:traded_with_dan",
+      "conditions": {
+        "item": {
+          "items": "minecraft:diamond"
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:diamond"
+    },
+    "title": {
+      "translate": "advancements.dan.diamond_from_dan.title"
+    },
+    "description": {
+      "translate": "advancements.dan.diamond_from_dan.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "bought_diamond"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

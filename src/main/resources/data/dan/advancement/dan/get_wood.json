@@ -1,0 +1,31 @@
+{
+  "parent": "dan:dan/root",
+  "criteria": {
+    "has_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:logs"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:oak_log"
+    },
+    "title": {
+      "translate": "advancements.dan.get_wood.title"
+    },
+    "description": {
+      "translate": "advancements.dan.get_wood.description"
+    }
+  },
+  "requirements": [
+    [
+      "has_log"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "parent": "dan:dan/stone_pickaxe",
+  "criteria": {
+    "has_iron_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_ingot"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_ingot"
+    },
+    "title": {
+      "translate": "advancements.dan.iron_ingot.title"
+    },
+    "description": {
+      "translate": "advancements.dan.iron_ingot.description"
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_ingot"
+    ]
+  ]
+}

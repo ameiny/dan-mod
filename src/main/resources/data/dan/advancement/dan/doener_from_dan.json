@@ -1,0 +1,29 @@
+{
+  "parent": "dan:dan/trade_with_dan",
+  "criteria": {
+    "bought_doener": {
+      "trigger": "dan:traded_with_dan",
+      "conditions": {
+        "item": {
+          "items": "dan:vegan_doener"
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "dan:vegan_doener"
+    },
+    "title": {
+      "translate": "advancements.dan.doener_from_dan.title"
+    },
+    "description": {
+      "translate": "advancements.dan.doener_from_dan.description"
+    }
+  },
+  "requirements": [
+    [
+      "bought_doener"
+    ]
+  ]
+}

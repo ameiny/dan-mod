@@ -1,0 +1,38 @@
+{
+  "parent": "dan:dan/eat_vegan_doener",
+  "criteria": {
+    "ate_in_nether": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "dan:vegan_doener"
+        },
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "dimension": "minecraft:the_nether"
+            }
+          }
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:blaze_powder"
+    },
+    "title": {
+      "translate": "advancements.dan.doener_in_nether.title"
+    },
+    "description": {
+      "translate": "advancements.dan.doener_in_nether.description"
+    }
+  },
+  "requirements": [
+    [
+      "ate_in_nether"
+    ]
+  ]
+}

@@ -115,6 +115,9 @@ public class GreetGoal extends Goal {
                 if (this.phaseTicks >= waitTicks) {
                     this.dan.greet();
                     this.dan.markGreeted(this.target);
+                    if (this.responding && this.target instanceof DanEntity) {
+                        this.dan.announceDanMeeting();
+                    }
                     switchPhase(Phase.GREET);
                 }
             }

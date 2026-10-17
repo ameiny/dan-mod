@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "dan:polished_dan_block"
+    },
+    "title": {
+      "translate": "advancements.dan.root.title"
+    },
+    "description": {
+      "translate": "advancements.dan.root.description"
+    },
+    "background": "dan:block/dan_block",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ]
+}

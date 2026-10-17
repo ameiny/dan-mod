@@ -8,6 +8,8 @@ import com.geckolib.animation.RawAnimation;
 import com.geckolib.animation.object.PlayState;
 import com.geckolib.constant.DefaultAnimations;
 import com.geckolib.util.GeckoLibUtil;
+import dev.meiny.dan.advancement.ModCriteria;
+import dev.meiny.dan.entity.goal.DanTemptGoal;
 import dev.meiny.dan.entity.goal.GreetGoal;
 import dev.meiny.dan.entity.goal.InspectNatureGoal;
 import dev.meiny.dan.entity.goal.TradeWithPlayerGoal;
@@ -16,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -31,7 +34,6 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -42,12 +44,16 @@ import net.minecraft.world.item.trading.Merchant;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     private static final RawAnimation GREET_ANIMATION = RawAnimation.begin().thenPlay("action.greet");
     private static final long GREET_MEMORY_TICKS = 6000L;
     private static final long INCOMING_GREET_TIMEOUT = 40L;
     private static final long RESTOCK_INTERVAL_TICKS = 24000L;
+    private static final long LURE_TIMEOUT_TICKS = 200L;
+    private static final double LURE_DISTANCE = 100.0;
+    private static final double MEETING_WITNESS_RANGE = 16.0;
 
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private final Map<UUID, Long> greetedRecently = new HashMap<>();
@@ -60,6 +66,9 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     private Player tradingPlayer;
     private MerchantOffers offers;
     private long lastRestockTime;
+
+    private Vec3 lureOrigin;
+    private long lastLureTime;
 
     public DanEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
@@ -78,7 +87,7 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Monster.class, 8.0f, 1.0, 1.5));
         this.goalSelector.addGoal(2, new PanicGoal(this, 1.6));
         this.goalSelector.addGoal(3, new TradeWithPlayerGoal(this));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.1, Ingredient.of(Items.IRON_CHAIN), false));
+        this.goalSelector.addGoal(4, new DanTemptGoal(this, 1.1, Ingredient.of(Items.IRON_CHAIN)));
         this.goalSelector.addGoal(5, new GreetGoal(this, 1.0, 8));
         this.goalSelector.addGoal(6, new InspectNatureGoal(this, 1.0, 10));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 0.8));
@@ -143,6 +152,12 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     @Override
     public void notifyTrade(MerchantOffer offer) {
         offer.increaseUses();
+        if (this.tradingPlayer instanceof ServerPlayer serverPlayer) {
+            ModCriteria.TRADED_WITH_DAN.trigger(serverPlayer, offer.getResult());
+            if (offer.isOutOfStock()) {
+                ModCriteria.BOUGHT_OUT_DAN.trigger(serverPlayer);
+            }
+        }
     }
 
     @Override
@@ -183,6 +198,27 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     public void greet() {
         triggerAnim("action", "greet");
         this.playSound(ModSounds.DAN_GREET1, 1.0f, this.getVoicePitch());
+    }
+
+    public void trackLure(Player player) {
+        long now = this.level().getGameTime();
+        if (this.lureOrigin == null || now - this.lastLureTime > LURE_TIMEOUT_TICKS) {
+            this.lureOrigin = this.position();
+        }
+        this.lastLureTime = now;
+
+        double dx = this.getX() - this.lureOrigin.x;
+        double dz = this.getZ() - this.lureOrigin.z;
+        if (player instanceof ServerPlayer serverPlayer && dx * dx + dz * dz >= LURE_DISTANCE * LURE_DISTANCE) {
+            ModCriteria.LURED_DAN_HOME.trigger(serverPlayer);
+        }
+    }
+
+    public void announceDanMeeting() {
+        for (ServerPlayer player : this.level().getEntitiesOfClass(
+                ServerPlayer.class, this.getBoundingBox().inflate(MEETING_WITNESS_RANGE))) {
+            ModCriteria.SAW_DANS_MEET.trigger(player);
+        }
     }
 
     public boolean isInspecting() {

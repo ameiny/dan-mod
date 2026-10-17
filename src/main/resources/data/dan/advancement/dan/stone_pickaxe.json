@@ -1,0 +1,31 @@
+{
+  "parent": "dan:dan/get_wood",
+  "criteria": {
+    "has_stone_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:stone_pickaxe"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:stone_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.dan.stone_pickaxe.title"
+    },
+    "description": {
+      "translate": "advancements.dan.stone_pickaxe.description"
+    }
+  },
+  "requirements": [
+    [
+      "has_stone_pickaxe"
+    ]
+  ]
+}

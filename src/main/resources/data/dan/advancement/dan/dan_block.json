@@ -1,0 +1,31 @@
+{
+  "parent": "dan:dan/iron_chain",
+  "criteria": {
+    "has_dan_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "dan:dan_block"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "dan:dan_block"
+    },
+    "title": {
+      "translate": "advancements.dan.dan_block.title"
+    },
+    "description": {
+      "translate": "advancements.dan.dan_block.description"
+    }
+  },
+  "requirements": [
+    [
+      "has_dan_block"
+    ]
+  ]
+}

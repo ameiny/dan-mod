@@ -1,0 +1,28 @@
+{
+  "parent": "dan:dan/meet_dan",
+  "criteria": {
+    "lured_home": {
+      "trigger": "dan:lured_dan_home"
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:red_bed"
+    },
+    "title": {
+      "translate": "advancements.dan.dan_moved_in.title"
+    },
+    "description": {
+      "translate": "advancements.dan.dan_moved_in.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "lured_home"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

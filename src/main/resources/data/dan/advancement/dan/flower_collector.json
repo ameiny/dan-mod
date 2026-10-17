@@ -1,0 +1,113 @@
+{
+  "parent": "dan:dan/trade_with_dan",
+  "criteria": {
+    "pink_petals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:pink_petals"
+          }
+        ]
+      }
+    },
+    "poppy": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:poppy"
+          }
+        ]
+      }
+    },
+    "dandelion": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:dandelion"
+          }
+        ]
+      }
+    },
+    "cornflower": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:cornflower"
+          }
+        ]
+      }
+    },
+    "oxeye_daisy": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:oxeye_daisy"
+          }
+        ]
+      }
+    },
+    "red_tulip": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:red_tulip"
+          }
+        ]
+      }
+    },
+    "torchflower": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:torchflower"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:torchflower"
+    },
+    "title": {
+      "translate": "advancements.dan.flower_collector.title"
+    },
+    "description": {
+      "translate": "advancements.dan.flower_collector.description"
+    },
+    "frame": "challenge"
+  },
+  "requirements": [
+    [
+      "pink_petals"
+    ],
+    [
+      "poppy"
+    ],
+    [
+      "dandelion"
+    ],
+    [
+      "cornflower"
+    ],
+    [
+      "oxeye_daisy"
+    ],
+    [
+      "red_tulip"
+    ],
+    [
+      "torchflower"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}
