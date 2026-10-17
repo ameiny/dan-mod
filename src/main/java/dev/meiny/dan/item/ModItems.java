@@ -22,7 +22,7 @@ import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 
 public class ModItems {
     private static final int VEGAN_DOENER_EFFECT_TICKS = 200;
-    private static final int MILK_JUMBO_EFFECT_TICKS = 160;
+    private static final int MILK_JUMBO_EFFECT_TICKS = 400;
 
     public static final FoodProperties VEGAN_DOENER_FOOD = new FoodProperties.Builder()
             .nutrition(8)
@@ -45,7 +45,7 @@ public class ModItems {
     public static final Consumable MILK_JUMBO_CONSUMABLE = Consumables.defaultFood()
             .consumeSeconds(0.8f)
             .onConsume(new ApplyStatusEffectsConsumeEffect(
-                    new MobEffectInstance(MobEffects.SPEED, MILK_JUMBO_EFFECT_TICKS, 1)))
+                    new MobEffectInstance(MobEffects.STRENGTH, MILK_JUMBO_EFFECT_TICKS, 1)))
             .build();
 
     public static final Item DAN_SPAWN_EGG = register(
