@@ -1,0 +1,27 @@
+{
+  "parent": "dan:dan/aldi",
+  "criteria": {
+    "bought_at_checkout": {
+      "trigger": "dan:traded_with_dan",
+      "conditions": {
+        "cashier": true
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:amethyst_shard"
+    },
+    "title": {
+      "translate": "advancements.dan.aldi_checkout.title"
+    },
+    "description": {
+      "translate": "advancements.dan.aldi_checkout.description"
+    }
+  },
+  "requirements": [
+    [
+      "bought_at_checkout"
+    ]
+  ]
+}

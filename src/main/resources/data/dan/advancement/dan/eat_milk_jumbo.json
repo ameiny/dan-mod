@@ -1,5 +1,5 @@
 {
-  "parent": "dan:dan/aldi",
+  "parent": "dan:dan/aldi_checkout",
   "criteria": {
     "ate_milk_jumbo": {
       "trigger": "minecraft:consume_item",

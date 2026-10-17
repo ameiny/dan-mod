@@ -1,10 +1,12 @@
 package dev.meiny.dan.client;
 
 import com.geckolib.constant.DataTickets;
+import com.geckolib.constant.dataticket.DataTicket;
 import com.geckolib.renderer.GeoEntityRenderer;
 import com.geckolib.renderer.base.BoneSnapshots;
 import com.geckolib.renderer.base.GeoRenderState;
 import com.geckolib.renderer.base.RenderPassInfo;
+import dev.meiny.dan.Dan;
 import dev.meiny.dan.entity.DanEntity;
 import dev.meiny.dan.entity.ModEntityTypes;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -15,9 +17,26 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 public class DanRenderer<R extends EntityRenderState & GeoRenderState> extends GeoEntityRenderer<DanEntity, R> {
+    private static final DataTicket<Boolean> ALDI_CASHIER = DataTicket.create("dan_aldi_cashier", Boolean.class);
+    private static final Identifier ALDI_CASHIER_TEXTURE = Dan.id("textures/entity/dan_aldi.png");
+
     public DanRenderer(EntityRendererProvider.Context context) {
         super(context, ModEntityTypes.DAN);
         withScale(0.9375f);
+    }
+
+    @Override
+    public void addRenderData(DanEntity animatable, Void relatedObject, R renderState, float partialTick) {
+        super.addRenderData(animatable, relatedObject, renderState, partialTick);
+        renderState.addGeckolibData(ALDI_CASHIER, animatable.isAldiCashier());
+    }
+
+    @Override
+    public Identifier getTextureLocation(R renderState) {
+        if (renderState.getOrDefaultGeckolibData(ALDI_CASHIER, false)) {
+            return ALDI_CASHIER_TEXTURE;
+        }
+        return super.getTextureLocation(renderState);
     }
 
     @Override

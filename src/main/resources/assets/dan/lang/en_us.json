@@ -60,5 +60,8 @@
   "advancements.dan.eat_milk_jumbo.title": "Jumbo Break",
   "advancements.dan.eat_milk_jumbo.description": "Eat a Milk Jumbo",
   "advancements.dan.befriend_dan.title": "Best Buddy",
-  "advancements.dan.befriend_dan.description": "Befriend a Dan with Milk Jumbos"
+  "advancements.dan.befriend_dan.description": "Befriend a Dan with Milk Jumbos",
+  "merchant.dan.aldi_cashier": "Aldi Checkout",
+  "advancements.dan.aldi_checkout.title": "Checkout",
+  "advancements.dan.aldi_checkout.description": "Buy something from Dan at the Aldi checkout"
 }

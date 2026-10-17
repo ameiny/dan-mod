@@ -9,6 +9,7 @@ import com.geckolib.animation.object.PlayState;
 import com.geckolib.constant.DefaultAnimations;
 import com.geckolib.util.GeckoLibUtil;
 import dev.meiny.dan.advancement.ModCriteria;
+import dev.meiny.dan.entity.goal.DanCashierGoal;
 import dev.meiny.dan.entity.goal.DanFollowOwnerGoal;
 import dev.meiny.dan.entity.goal.DanStayGoal;
 import dev.meiny.dan.entity.goal.DanTemptGoal;
@@ -24,6 +25,9 @@ import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -65,6 +69,9 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     private static final double MEETING_WITNESS_RANGE = 16.0;
     private static final int BEFRIEND_CHANCE = 3;
     private static final float FRIEND_HEAL_AMOUNT = 4.0f;
+    private static final String ALDI_CASHIER_TAG = "aldi_cashier";
+    private static final EntityDataAccessor<Boolean> DATA_ALDI_CASHIER =
+            SynchedEntityData.defineId(DanEntity.class, EntityDataSerializers.BOOLEAN);
 
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private final Map<UUID, Long> greetedRecently = new HashMap<>();
@@ -96,8 +103,15 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     }
 
     @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_ALDI_CASHIER, false);
+    }
+
+    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(0, new DanCashierGoal(this));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Monster.class, 8.0f, 1.0, 1.5));
         this.goalSelector.addGoal(1, new DanStayGoal(this));
         this.goalSelector.addGoal(2, new PanicGoal(this, 1.6));
@@ -123,7 +137,7 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
         }
 
         ItemStack stack = player.getItemInHand(hand);
-        if (stack.is(ModItems.MILK_JUMBO)) {
+        if (stack.is(ModItems.MILK_JUMBO) && !this.isAldiCashier()) {
             if (!this.hasOwner()) {
                 if (this.level() instanceof ServerLevel serverLevel) {
                     stack.consume(1, player);
@@ -151,7 +165,10 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
 
         if (!this.level().isClientSide()) {
             this.setTradingPlayer(player);
-            this.openTradingScreen(player, this.getDisplayName(), 1);
+            Component title = this.isAldiCashier()
+                    ? Component.translatable("merchant.dan.aldi_cashier")
+                    : this.getDisplayName();
+            this.openTradingScreen(player, title, 1);
         }
         return InteractionResult.SUCCESS_SERVER;
     }
@@ -159,6 +176,7 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     @Override
     protected void customServerAiStep(ServerLevel level) {
         super.customServerAiStep(level);
+        this.entityData.set(DATA_ALDI_CASHIER, this.entityTags().contains(ALDI_CASHIER_TAG));
         long now = level.getGameTime();
         if (this.offers != null && !this.isTrading() && now - this.lastRestockTime >= RESTOCK_INTERVAL_TICKS) {
             this.offers.forEach(MerchantOffer::resetUses);
@@ -183,7 +201,7 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     @Override
     public MerchantOffers getOffers() {
         if (this.offers == null) {
-            this.offers = DanTrades.create(this.getUUID());
+            this.offers = this.isAldiCashier() ? DanTrades.createAldi() : DanTrades.create(this.getUUID());
             this.lastRestockTime = this.level().getGameTime();
         }
         return this.offers;
@@ -197,7 +215,7 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     public void notifyTrade(MerchantOffer offer) {
         offer.increaseUses();
         if (this.tradingPlayer instanceof ServerPlayer serverPlayer) {
-            ModCriteria.TRADED_WITH_DAN.trigger(serverPlayer, offer.getResult());
+            ModCriteria.TRADED_WITH_DAN.trigger(serverPlayer, offer.getResult(), this.isAldiCashier());
             if (offer.isOutOfStock()) {
                 ModCriteria.BOUGHT_OUT_DAN.trigger(serverPlayer);
             }
@@ -242,6 +260,18 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     public void greet() {
         triggerAnim("action", "greet");
         this.playSound(ModSounds.DAN_GREET1, 1.0f, this.getVoicePitch());
+    }
+
+    public boolean isAldiCashier() {
+        if (this.level().isClientSide()) {
+            return this.entityData.get(DATA_ALDI_CASHIER);
+        }
+        return this.entityTags().contains(ALDI_CASHIER_TAG);
+    }
+
+    @Override
+    public boolean isPushable() {
+        return !this.isAldiCashier() && super.isPushable();
     }
 
     public boolean hasOwner() {

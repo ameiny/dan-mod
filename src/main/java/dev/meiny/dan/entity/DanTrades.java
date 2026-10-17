@@ -52,6 +52,13 @@ public final class DanTrades {
         return offers;
     }
 
+    public static MerchantOffers createAldi() {
+        MerchantOffers offers = new MerchantOffers();
+        offers.add(offer(Items.AMETHYST_SHARD, 2, ModItems.MILK_JUMBO, 3, 12));
+        offers.add(offer(Items.AMETHYST_SHARD, 1, ModItems.VEGAN_DOENER, 1, 8));
+        return offers;
+    }
+
     private static MerchantOffer createOffer(int index) {
         return switch (index) {
             case 0 -> offer(Items.POPPY, 1, Items.COPPER_INGOT, 1, 12);
