@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "dan_glass",
+  "key": {
+    "#": "minecraft:glass",
+    "X": "dan:dan_block"
+  },
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "dan:dan_glass"
+  }
+}

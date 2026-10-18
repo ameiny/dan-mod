@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "dan:block/dan_glass",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "dan:block/dan_glass",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "dan:block/dan_glass"
+    },
+    "facing=west": {
+      "model": "dan:block/dan_glass",
+      "y": 90
+    }
+  }
+}

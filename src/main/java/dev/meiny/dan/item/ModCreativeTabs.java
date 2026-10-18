@@ -30,6 +30,8 @@ public class ModCreativeTabs {
                     output.accept(ModBlocks.POLISHED_DAN_BLOCK);
                     output.accept(ModBlocks.POLISHED_DAN_STAIRS);
                     output.accept(ModBlocks.POLISHED_DAN_SLAB);
+                    output.accept(ModBlocks.DAN_GLASS);
+                    output.accept(ModBlocks.DAN_GLASS_PANE);
                 })
                 .build());
     }

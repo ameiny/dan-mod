@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": "minecraft:tool/can_silk_touch",
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "dan:dan_glass"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "dan:blocks/dan_glass"
+}

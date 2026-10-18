@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "dan_glass_pane",
+  "key": {
+    "#": "minecraft:glass_pane",
+    "$": "dan:dan_block"
+  },
+  "pattern": [
+    "###",
+    "#$#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "dan:dan_glass_pane"
+  }
+}

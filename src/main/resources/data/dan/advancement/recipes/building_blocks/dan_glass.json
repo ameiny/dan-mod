@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dan_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "dan:dan_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "dan:dan_glass"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dan_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dan:dan_glass"
+    ]
+  }
+}

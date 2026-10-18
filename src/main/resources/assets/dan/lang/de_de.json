@@ -65,5 +65,7 @@
   "advancements.dan.aldi_checkout.title": "An der Kasse",
   "advancements.dan.aldi_checkout.description": "Kauf etwas bei Dan an der Aldi-Kasse",
   "advancements.dan.all_dan_advancements.title": "100 % Dan",
-  "advancements.dan.all_dan_advancements.description": "Schaffe alle anderen Dan-Fortschritte"
+  "advancements.dan.all_dan_advancements.description": "Schaffe alle anderen Dan-Fortschritte",
+  "block.dan.dan_glass": "Dan-Glas",
+  "block.dan.dan_glass_pane": "Dan-Glasscheibe"
 }

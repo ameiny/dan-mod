@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "dan_glass_pane",
+  "key": {
+    "#": "dan:dan_glass"
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 16,
+    "id": "dan:dan_glass_pane"
+  }
+}

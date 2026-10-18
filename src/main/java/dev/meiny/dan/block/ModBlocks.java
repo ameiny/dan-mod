@@ -13,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.GlazedTerracottaBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -53,6 +54,18 @@ public class ModBlocks {
             BlockBehaviour.Properties.ofFullCopy(POLISHED_DAN_BLOCK)
     );
 
+    public static final Block DAN_GLASS = register(
+            "dan_glass",
+            DanGlassBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
+    );
+
+    public static final Block DAN_GLASS_PANE = register(
+            "dan_glass_pane",
+            IronBarsBlock::new,
+            BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE)
+    );
+
     private static Block register(String name, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties properties) {
         ResourceKey<Block> blockKey = ResourceKey.create(Registries.BLOCK, Dan.id(name));
         ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM, Dan.id(name));
@@ -71,6 +84,10 @@ public class ModBlocks {
             output.accept(POLISHED_DAN_BLOCK);
             output.accept(POLISHED_DAN_STAIRS);
             output.accept(POLISHED_DAN_SLAB);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COLORED_BLOCKS).register(output -> {
+            output.accept(DAN_GLASS);
+            output.accept(DAN_GLASS_PANE);
         });
     }
 }

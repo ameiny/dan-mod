@@ -65,5 +65,7 @@
   "advancements.dan.aldi_checkout.title": "Checkout",
   "advancements.dan.aldi_checkout.description": "Buy something from Dan at the Aldi checkout",
   "advancements.dan.all_dan_advancements.title": "100% Dan",
-  "advancements.dan.all_dan_advancements.description": "Complete every other Dan advancement"
+  "advancements.dan.all_dan_advancements.description": "Complete every other Dan advancement",
+  "block.dan.dan_glass": "Dan Glass",
+  "block.dan.dan_glass_pane": "Dan Glass Pane"
 }
