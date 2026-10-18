@@ -1,0 +1,229 @@
+{
+  "parent": "dan:dan/root",
+  "criteria": {
+    "aldi": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/aldi"
+      }
+    },
+    "aldi_checkout": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/aldi_checkout"
+      }
+    },
+    "all_dan_blocks": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/all_dan_blocks"
+      }
+    },
+    "befriend_dan": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/befriend_dan"
+      }
+    },
+    "dan_block": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/dan_block"
+      }
+    },
+    "dan_moved_in": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/dan_moved_in"
+      }
+    },
+    "dans_meet": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/dans_meet"
+      }
+    },
+    "diamond_from_dan": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/diamond_from_dan"
+      }
+    },
+    "doener_at_night": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/doener_at_night"
+      }
+    },
+    "doener_from_dan": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/doener_from_dan"
+      }
+    },
+    "doener_hangover": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/doener_hangover"
+      }
+    },
+    "doener_in_nether": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/doener_in_nether"
+      }
+    },
+    "eat_milk_jumbo": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/eat_milk_jumbo"
+      }
+    },
+    "eat_vegan_doener": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/eat_vegan_doener"
+      }
+    },
+    "flower_collector": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/flower_collector"
+      }
+    },
+    "get_wood": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/get_wood"
+      }
+    },
+    "iron_chain": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/iron_chain"
+      }
+    },
+    "iron_ingot": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/iron_ingot"
+      }
+    },
+    "meet_dan": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/meet_dan"
+      }
+    },
+    "polished_dan_block": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/polished_dan_block"
+      }
+    },
+    "sold_out": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/sold_out"
+      }
+    },
+    "stone_pickaxe": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/stone_pickaxe"
+      }
+    },
+    "trade_with_dan": {
+      "trigger": "dan:completed_dan_advancement",
+      "conditions": {
+        "advancement": "dan:dan/trade_with_dan"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:nether_star"
+    },
+    "title": {
+      "translate": "advancements.dan.all_dan_advancements.title"
+    },
+    "description": {
+      "translate": "advancements.dan.all_dan_advancements.description"
+    },
+    "frame": "challenge"
+  },
+  "requirements": [
+    [
+      "aldi"
+    ],
+    [
+      "aldi_checkout"
+    ],
+    [
+      "all_dan_blocks"
+    ],
+    [
+      "befriend_dan"
+    ],
+    [
+      "dan_block"
+    ],
+    [
+      "dan_moved_in"
+    ],
+    [
+      "dans_meet"
+    ],
+    [
+      "diamond_from_dan"
+    ],
+    [
+      "doener_at_night"
+    ],
+    [
+      "doener_from_dan"
+    ],
+    [
+      "doener_hangover"
+    ],
+    [
+      "doener_in_nether"
+    ],
+    [
+      "eat_milk_jumbo"
+    ],
+    [
+      "eat_vegan_doener"
+    ],
+    [
+      "flower_collector"
+    ],
+    [
+      "get_wood"
+    ],
+    [
+      "iron_chain"
+    ],
+    [
+      "iron_ingot"
+    ],
+    [
+      "meet_dan"
+    ],
+    [
+      "polished_dan_block"
+    ],
+    [
+      "sold_out"
+    ],
+    [
+      "stone_pickaxe"
+    ],
+    [
+      "trade_with_dan"
+    ]
+  ],
+  "rewards": {
+    "experience": 200
+  }
+}

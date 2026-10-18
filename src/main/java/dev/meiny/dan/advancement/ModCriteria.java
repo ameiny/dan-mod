@@ -21,6 +21,10 @@ public class ModCriteria {
     public static final PlayerTrigger BEFRIENDED_DAN = Registry.register(
             BuiltInRegistries.TRIGGER_TYPES, Dan.id("befriended_dan"), new PlayerTrigger());
 
+    public static final CompletedAdvancementTrigger COMPLETED_DAN_ADVANCEMENT = Registry.register(
+            BuiltInRegistries.TRIGGER_TYPES, Dan.id("completed_dan_advancement"), new CompletedAdvancementTrigger());
+
     public static void init() {
+        DanAdvancementProgress.init();
     }
 }

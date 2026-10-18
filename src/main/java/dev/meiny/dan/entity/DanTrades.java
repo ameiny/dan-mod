@@ -54,7 +54,7 @@ public final class DanTrades {
 
     public static MerchantOffers createAldi() {
         MerchantOffers offers = new MerchantOffers();
-        offers.add(offer(Items.AMETHYST_SHARD, 2, ModItems.MILK_JUMBO, 3, 12));
+        offers.add(offer(Items.AMETHYST_SHARD, 3, ModItems.MILK_JUMBO, 7, 12));
         offers.add(offer(Items.AMETHYST_SHARD, 1, ModItems.VEGAN_DOENER, 1, 8));
         return offers;
     }
