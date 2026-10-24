@@ -4,5 +4,25 @@
       "dan:greet"
     ],
     "subtitle": "subtitles.dan.greet"
+  },
+  "entity.dan.hurt": {
+    "sounds": [
+      "dan:hurt1",
+      "dan:hurt2",
+      "dan:hurt3"
+    ],
+    "subtitle": "subtitles.dan.hurt"
+  },
+  "entity.dan.trade": {
+    "sounds": [
+      "dan:trade"
+    ],
+    "subtitle": "subtitles.dan.trade"
+  },
+  "entity.dan.death": {
+    "sounds": [
+      "dan:death"
+    ],
+    "subtitle": "subtitles.dan.death"
   }
 }

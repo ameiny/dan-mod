@@ -34,6 +34,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -70,6 +71,7 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     private static final int BEFRIEND_CHANCE = 3;
     private static final float FRIEND_HEAL_AMOUNT = 4.0f;
     private static final String ALDI_CASHIER_TAG = "aldi_cashier";
+    private static final long TRADE_SOUND_COOLDOWN_TICKS = 50L;
     private static final EntityDataAccessor<Boolean> DATA_ALDI_CASHIER =
             SynchedEntityData.defineId(DanEntity.class, EntityDataSerializers.BOOLEAN);
 
@@ -90,6 +92,8 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
 
     private UUID ownerId;
     private boolean staying;
+
+    private long lastTradeSoundTime = -TRADE_SOUND_COOLDOWN_TICKS;
 
     public DanEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
@@ -214,6 +218,11 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     @Override
     public void notifyTrade(MerchantOffer offer) {
         offer.increaseUses();
+        long now = this.level().getGameTime();
+        if (now - this.lastTradeSoundTime >= TRADE_SOUND_COOLDOWN_TICKS) {
+            this.lastTradeSoundTime = now;
+            this.playSound(ModSounds.DAN_TRADE, 1.0f, 1.0f);
+        }
         if (this.tradingPlayer instanceof ServerPlayer serverPlayer) {
             ModCriteria.TRADED_WITH_DAN.trigger(serverPlayer, offer.getResult(), this.isAldiCashier());
             if (offer.isOutOfStock()) {
@@ -260,6 +269,25 @@ public class DanEntity extends PathfinderMob implements GeoEntity, Merchant {
     public void greet() {
         triggerAnim("action", "greet");
         this.playSound(ModSounds.DAN_GREET1, 1.0f, this.getVoicePitch());
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return ModSounds.DAN_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.DAN_DEATH;
+    }
+
+    @Override
+    public void makeSound(SoundEvent sound) {
+        if (sound == ModSounds.DAN_DEATH) {
+            this.playSound(sound, this.getSoundVolume(), 1.0f);
+            return;
+        }
+        super.makeSound(sound);
     }
 
     public boolean isAldiCashier() {
